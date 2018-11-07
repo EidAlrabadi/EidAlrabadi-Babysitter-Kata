@@ -35,11 +35,28 @@ public class InputAnalyzerTest {
 	
 	
 	@Test public void ImproperTimeWhereDigitToLeftOfColonIsIncorrect() {
-		assertEquals(false,timeAnalyzer.properTimeInputs("13:43"));
+		assertEquals(false,timeAnalyzer.properTimeInputs("13:43 PM"));
 	}
 	
+	@Test public void ImproperTimeWhereDigitToTheRightOfColonIsIncorrect() {
+		assertEquals(false,timeAnalyzer.properTimeInputs("12:99 PM"));
+	}
 	
+	@Test public void ImproperTimeFormatWithSingleCharacterInput() {
+		assertEquals(false,timeAnalyzer.properTimeInputs("A"));
+	}
 	
+	@Test public void ImproperTimeFormatWithoutPMORAM() {
+		assertEquals(false,timeAnalyzer.properTimeInputs("12:53 XM"));
+	}
+	
+	@Test public void ImproperTimeFormatWithoutSpace() {
+		assertEquals(false,timeAnalyzer.properTimeInputs("12:53AM"));
+	}
+	
+	@Test public void ImproperTimeFormatEmptyString() {
+		assertEquals(false,timeAnalyzer.properTimeInputs(""));
+	}
 	
 	
 	
