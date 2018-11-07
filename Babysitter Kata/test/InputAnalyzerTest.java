@@ -62,6 +62,32 @@ public class InputAnalyzerTest {
 	}
 	
 	
+	@Test public void ImproperTimeDuringNoneWorkingHours2() {
+		assertEquals(false,timeAnalyzer.properTimeInputs("4:59 AM"));
+	}
+	
+	@Test public void ImproperTimeDuringNoneWorkingHours3() {
+		assertEquals(false,timeAnalyzer.properTimeInputs("5:59 AM"));
+	}
+	
+	@Test public void ImproperTimeDuringNoneWorkingHours4() {
+		assertEquals(false,timeAnalyzer.properTimeInputs("1:59 PM"));
+	}
+	
+	@Test public void ImproperTimeDuringNoneWorkingHours5() {
+		assertEquals(false,timeAnalyzer.properTimeInputs("12:05 PM"));
+	}
+	
+	@Test public void ImproperTimeDuringNoneWorkingHoursExactStart() {
+		assertEquals(true,timeAnalyzer.properTimeInputs("5:00 PM"));
+
+	}
+	
+	@Test public void ImproperTimeDuringNoneWorkingHoursExactEnd() {
+		assertEquals(true,timeAnalyzer.properTimeInputs("4:00 AM"));
+
+	}
+	
 	
 	
 	

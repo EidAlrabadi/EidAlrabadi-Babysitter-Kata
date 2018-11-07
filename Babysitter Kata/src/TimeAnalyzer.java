@@ -19,6 +19,8 @@ public class TimeAnalyzer {
 	 * @return true if the format is legal, or false if the format is illegal.
 	 */
 
+		String exactStart = "17:00";   //This is the start time 5 PM converted to military
+		String exactEnd = "04:00";     // This is the end time 4 AM converted to military
 		public boolean properTimeInputs(String time) {
 		LocalTime convertedFormat;
 		try {
@@ -30,26 +32,21 @@ public class TimeAnalyzer {
 		
 		String convertedFormatString = convertedFormat.toString();
 		System.out.println(convertedFormatString);
+		if(convertedFormatString.equals(exactStart) || convertedFormatString.equals(exactEnd)) {
+			return true;
+		}
 		int leftOfColonDigit = Integer.parseInt(convertedFormatString.substring(0,2)); //Gets the value to the left of colon and transforms to int.
-		if(leftOfColonDigit >= 4 && leftOfColonDigit <= 16) {
+	    int fourAM = 4; // 4 AM
+	    int fivePM = 16;  // 5 PM
+		
+		if(leftOfColonDigit >= fourAM && leftOfColonDigit <= fivePM) { //If Greater than 4:00 PM with exception of 4:00 PM or
+																	   // less than 16 which is 5 PM military it is non working errors so false.
+			System.out.println("These are non working hours, please input working hours");
 			return false;
 		}
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		return true;
+		return true;   //If all test checks pass then return true.
 		
 	}
 
