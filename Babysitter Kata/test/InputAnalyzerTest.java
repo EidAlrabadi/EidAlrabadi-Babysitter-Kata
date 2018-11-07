@@ -24,7 +24,7 @@ public class InputAnalyzerTest {
 	}
 	
 	@Test public void ProperTimeInputWithOneDigitToTheLeftOfColon () {
-		assertEquals(true,timeAnalyzer.properTimeInputs("1:53 AM"));
+		assertEquals(true,timeAnalyzer.properTimeInputs("5:53 PM"));
 
 	}
 	
@@ -32,8 +32,7 @@ public class InputAnalyzerTest {
 		//One digit to the left of colon, and two to the right
 		assertEquals(true,timeAnalyzer.properTimeInputs("1:01 AM"));
 	}
-	
-	
+		
 	@Test public void ImproperTimeWhereDigitToLeftOfColonIsIncorrect() {
 		assertEquals(false,timeAnalyzer.properTimeInputs("13:43 PM"));
 	}
@@ -58,6 +57,9 @@ public class InputAnalyzerTest {
 		assertEquals(false,timeAnalyzer.properTimeInputs(""));
 	}
 	
+	@Test public void ImproperTimeDuringNoneWorkingHours() {
+		assertEquals(false,timeAnalyzer.properTimeInputs("4:59 PM"));
+	}
 	
 	
 	

@@ -27,6 +27,28 @@ public class TimeAnalyzer {
 			System.out.println("Input format is incorrect. Please try again");         //Returns false if the format is incorrect.
 			return false;
 		}
+		
+		String convertedFormatString = convertedFormat.toString();
+		System.out.println(convertedFormatString);
+		int leftOfColonDigit = Integer.parseInt(convertedFormatString.substring(0,2)); //Gets the value to the left of colon and transforms to int.
+		if(leftOfColonDigit >= 4 && leftOfColonDigit <= 16) {
+			return false;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		return true;
 		
 	}
