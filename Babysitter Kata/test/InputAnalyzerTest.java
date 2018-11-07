@@ -28,6 +28,10 @@ public class InputAnalyzerTest {
 
 	}
 	
+	@Test public void ProperTimeInputWithOneDigitToTheRightOfColon() {
+		assertEquals(true,timeAnalyzer.properTimeInputs("1:01 AM"));
+	}
+	
 	
 	
 	
