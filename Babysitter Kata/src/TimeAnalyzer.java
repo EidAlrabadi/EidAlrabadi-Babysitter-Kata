@@ -54,22 +54,29 @@ public class TimeAnalyzer {
 		
 		/**
 		 * 
-		 * @param startTime (Starting time of the shift)
-		 * @param endTime   (End time of the shift)
+		 * @param startTime (Starting time of the shift) after TimeAnalyzer is called on the string
+		 * @param endTime   (End time of the shift) after TimeAnalyzer is called on the string
 		 * @return a boolean that makes sure the times are logical. End times before start time or outside of 
 		 * work hours.
 		 */
 			
 		
 		public boolean timeChecker(String startTime, String endTime) {
-			int startTimeInteger = Integer.parseInt(startTime.substring(0,2)); //Retrieves the start time since first two characters are value
-			int endTimeInteger = Integer.parseInt(endTime.substring(0,2));     //Retrieves the end time since first two characters are value
-
-			if(startTimeInteger - endTimeInteger < 0) {
-				return false;
+			String parsingStartTime = startTime.substring(0,2) + startTime.substring(3,5); //parses the string to retrieve the time value excluding :
+			String parsingEndTime =  endTime.substring(0,2) + endTime.substring(3,5);     // input "16:53" becomes "1653" for later calculations
+			
+			int startTimeInteger = Integer.parseInt(parsingStartTime); //Converting string to int for arithmetic
+			int endTimeInteger = Integer.parseInt(parsingEndTime);
+			
+			if(parsingStartTime.charAt(0) != '0' && parsingEndTime.charAt(0) == '0') {
+				return true;
 			}
 			
-			return true;
+			if(startTimeInteger - endTimeInteger < 0) {
+				return true;
+			}
+			
+			return false;
 			
 			
 			

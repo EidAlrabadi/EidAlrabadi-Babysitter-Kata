@@ -88,9 +88,16 @@ public class InputAnalyzerTest {
 	
 	
 	
-	@Test public void ProperStartTimeAndEndTime() {
-		String startTime = "5:00 PM";
-		String endTime = "9:42 PM";
+	
+	@Test public void ProperStartTimeAndEndTime1() {
+		String startTime = "17:00";
+		String endTime = "21:00";
+		assertEquals(true,timeAnalyzer.timeChecker(startTime, endTime));
+	}
+	
+	@Test public void ProperStartTimeAndEndTime2() {
+		String startTime = "17:00";
+		String endTime = "01:00";
 		assertEquals(true,timeAnalyzer.timeChecker(startTime, endTime));
 	}
 	
