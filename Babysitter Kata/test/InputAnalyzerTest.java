@@ -15,79 +15,84 @@ public class InputAnalyzerTest {
 		timeAnalyzer = new TimeAnalyzer();
 	}
 	
-	
-	
 	@Test
 	public void ProperTimeInputWithTwoDigitsToTheLeftOfColon () {
-		assertEquals(true,timeAnalyzer.properTimeInputs("12:53 AM"));
+		assertEquals("00:53",timeAnalyzer.properTimeInputs("12:53 AM"));
 		
 	}
 	
 	@Test public void ProperTimeInputWithOneDigitToTheLeftOfColon () {
-		assertEquals(true,timeAnalyzer.properTimeInputs("5:53 PM"));
+		assertEquals("17:53",timeAnalyzer.properTimeInputs("5:53 PM"));
 
 	}
 	
 	@Test public void ProperTimeInputWithOneDigitToTheRightOfColon1() {
 		//One digit to the left of colon, and two to the right
-		assertEquals(true,timeAnalyzer.properTimeInputs("1:01 AM"));
+		assertEquals("01:01",timeAnalyzer.properTimeInputs("1:01 AM"));
 	}
 		
 	@Test public void ImproperTimeWhereDigitToLeftOfColonIsIncorrect() {
-		assertEquals(false,timeAnalyzer.properTimeInputs("13:43 PM"));
+		assertEquals(null,timeAnalyzer.properTimeInputs("13:43 PM"));
 	}
 	
 	@Test public void ImproperTimeWhereDigitToTheRightOfColonIsIncorrect() {
-		assertEquals(false,timeAnalyzer.properTimeInputs("12:99 PM"));
+		assertEquals(null,timeAnalyzer.properTimeInputs("12:99 PM"));
 	}
 	
 	@Test public void ImproperTimeFormatWithSingleCharacterInput() {
-		assertEquals(false,timeAnalyzer.properTimeInputs("A"));
+		assertEquals(null,timeAnalyzer.properTimeInputs("A"));
 	}
 	
 	@Test public void ImproperTimeFormatWithoutPMORAM() {
-		assertEquals(false,timeAnalyzer.properTimeInputs("12:53 XM"));
+		assertEquals(null,timeAnalyzer.properTimeInputs("12:53 XM"));
 	}
 	
 	@Test public void ImproperTimeFormatWithoutSpace() {
-		assertEquals(false,timeAnalyzer.properTimeInputs("12:53AM"));
+		assertEquals(null,timeAnalyzer.properTimeInputs("12:53AM"));
 	}
 	
 	@Test public void ImproperTimeFormatEmptyString() {
-		assertEquals(false,timeAnalyzer.properTimeInputs(""));
+		assertEquals(null,timeAnalyzer.properTimeInputs(""));
 	}
 	
 	@Test public void ImproperTimeDuringNoneWorkingHours() {
-		assertEquals(false,timeAnalyzer.properTimeInputs("4:59 PM"));
+		assertEquals(null,timeAnalyzer.properTimeInputs("4:59 PM"));
 	}
 	
 	
 	@Test public void ImproperTimeDuringNoneWorkingHours2() {
-		assertEquals(false,timeAnalyzer.properTimeInputs("4:59 AM"));
+		assertEquals(null,timeAnalyzer.properTimeInputs("4:59 AM"));
 	}
 	
 	@Test public void ImproperTimeDuringNoneWorkingHours3() {
-		assertEquals(false,timeAnalyzer.properTimeInputs("5:59 AM"));
+		assertEquals(null,timeAnalyzer.properTimeInputs("5:59 AM"));
 	}
 	
 	@Test public void ImproperTimeDuringNoneWorkingHours4() {
-		assertEquals(false,timeAnalyzer.properTimeInputs("1:59 PM"));
+		assertEquals(null,timeAnalyzer.properTimeInputs("1:59 PM"));
 	}
 	
 	@Test public void ImproperTimeDuringNoneWorkingHours5() {
-		assertEquals(false,timeAnalyzer.properTimeInputs("12:05 PM"));
+		assertEquals(null,timeAnalyzer.properTimeInputs("12:05 PM"));
 	}
 	
 	@Test public void ImproperTimeDuringNoneWorkingHoursExactStart() {
-		assertEquals(true,timeAnalyzer.properTimeInputs("5:00 PM"));
+		assertEquals("17:00",timeAnalyzer.properTimeInputs("5:00 PM"));
 
 	}
 	
 	@Test public void ImproperTimeDuringNoneWorkingHoursExactEnd() {
-		assertEquals(true,timeAnalyzer.properTimeInputs("4:00 AM"));
+		assertEquals("04:00",timeAnalyzer.properTimeInputs("4:00 AM"));
 
 	}
 	
+	
+	
+	@Test public void ProperStartTimeAndEndTime() {
+		String startTime = "5:00 PM";
+		String endTime = "9:42 PM";
+		assertEquals(true,timeAnalyzer.timeChecker(startTime, endTime));
+	}
 	
 	
 	
