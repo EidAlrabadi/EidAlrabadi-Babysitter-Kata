@@ -3,8 +3,11 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Scanner;
 
 public class TimeAnalyzer {
+	
+	Scanner in = new Scanner(System.in);
 	
 	
 	/** This is a method that parses a user input string, and returns a boolean value
@@ -70,22 +73,62 @@ public class TimeAnalyzer {
 
 			int startTimeInteger = Integer.parseInt(parsingStartTime); //Converting string to int for arithmetic
 			int endTimeInteger = Integer.parseInt(parsingEndTime);
-			
+		
 			if(firstCharacterStartTime!= '0' && firstCharacterEndTime == '0') {
 				return true;
 				
+				
 			}else if(firstCharacterStartTime == '0' && firstCharacterEndTime != '0') {
+				System.out.println("Error! start time cannot be after end time!");
 				return false;
 			}
 			
 			else if(startTimeInteger - endTimeInteger < 0) {
-				return true;
-			}
+				return true;                    }
 			
+			
+			
+			System.out.println("Error! end time cannot be before start time");
 			return false;
 			
 			
 		}
+		
+		public String getStartTimeFromUser() {
+			System.out.print("Enter the start time in 12 hour format followed by a space and 'PM' OR 'AM': ");
+			String userTimeInput = in.nextLine();
+			String time = properTimeInputs(userTimeInput);
+			while(time == null) {
+				System.out.print("Enter the start time in 12 hour format followed by a space and 'PM' OR 'AM': ");
+				userTimeInput = in.nextLine();
+				time = properTimeInputs(userTimeInput);
+			}
+			
+			return time;
+		}
+		
+		public String getEndTimeFromUser() {
+			System.out.print("Enter the end time in 12 hour format followed by a space and 'PM' OR 'AM': ");
+			String userTimeInput = in.nextLine();
+			String time = properTimeInputs(userTimeInput);
+			while(time == null) {
+				System.out.print("Enter the end time in 12 hour format followed by a space and 'PM' OR 'AM': ");
+				userTimeInput = in.nextLine();
+				time = properTimeInputs(userTimeInput);
+			}
+			
+			return time;
+		}
+		
+		public boolean validateStartAndEndTime(String startTime, String endTime) {
+			while(!timeChecker(startTime,endTime)) {
+				startTime = getStartTimeFromUser();
+				endTime = getEndTimeFromUser();
+			}
+			return true;
+		}
+		
+		
 		
 		
 }

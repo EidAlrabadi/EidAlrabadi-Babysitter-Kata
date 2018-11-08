@@ -1,5 +1,6 @@
 import static org.junit.Assert.*;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -143,6 +144,12 @@ public class InputAnalyzerTest {
 	}
 	
 	
+	//Tear down method after all the tests are completed.
+	@After
+	public void tearDown() throws Exception {
+	    timeAnalyzer = null;
+	    assertNull(timeAnalyzer);
+	}
 	
 	
 	
