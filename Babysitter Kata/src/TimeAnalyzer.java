@@ -94,6 +94,13 @@ public class TimeAnalyzer {
 			
 		}
 		
+		/**
+		 * This method grabs the start time from a user using a scanner, if the time is in the incorrect
+		 * format it will continually ask until the proper format is achieved.
+		 * 
+		 * @return a proper input string.
+		 */
+		
 		public String getStartTimeFromUser() {
 			System.out.print("Enter the start time in 12 hour format followed by a space and 'PM' OR 'AM': ");
 			String userTimeInput = in.nextLine();
@@ -107,6 +114,13 @@ public class TimeAnalyzer {
 			return time;
 		}
 		
+		/**
+		 * Same exact method as getStartTimeFromuser() the only difference is the System.out.println()
+		 * This one specifically says end to avoid confusion with the user, and gets the end time.
+		 * 
+		 * @return a proper input string.
+		 */
+		
 		public String getEndTimeFromUser() {
 			System.out.print("Enter the end time in 12 hour format followed by a space and 'PM' OR 'AM': ");
 			String userTimeInput = in.nextLine();
@@ -119,6 +133,15 @@ public class TimeAnalyzer {
 			
 			return time;
 		}
+		
+		
+		/**
+		 * This method assumes the times given are in proper format (outside of non working hours), and
+		 * returns a boolean to check if the end time is prior to the start time. if this mistake is present
+		 * it will continually ask again until a proper input is given
+		 * 
+		 * @return boolean determing if the times are valid
+		 */
 		
 		public boolean validateStartAndEndTime(String startTime, String endTime) {
 			while(!timeChecker(startTime,endTime)) {
