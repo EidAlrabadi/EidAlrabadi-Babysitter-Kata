@@ -44,44 +44,46 @@ public class WageCalculator {
 		int parseEndTimeInteger = Integer.parseInt(parsingEndTime);
 		
 		char firstCharStartTime = parsingStartTime.charAt(0);
-		char firstStartEndTime = parsingEndTime.charAt(0);
-		
-		
-		
-		//If both times are prior to 11 PM.
+		char firstCharEndTime = parsingEndTime.charAt(0);
 		
 		
 		
 		//If both times are after 11 PM.
-		
-		 if(firstCharStartTime == '0' && firstCharStartTime == '0') {
+		 if(firstCharStartTime == '0' && firstCharEndTime == '0') {
 			timeWorked = Math.abs(parseEndTimeInteger - parseStartTimeInteger);
 			double hoursWorked = Math.ceil((timeWorked)/100.0);
-			System.out.println(hoursWorked);
+			
 			return (int)(hoursWorked) * 20; // Shift started and ended prior to 11 PM return hours worked * 15 for wage.
 		}
 		
-		 else if(parseStartTimeInteger < elevenPM && parseEndTimeInteger < elevenPM ) {
+		//If both times are prior to 11 PM.
+		 else if(parseStartTimeInteger < elevenPM && parseEndTimeInteger < elevenPM && firstCharStartTime != '0' && firstCharEndTime != '0') {
 			timeWorked = parseEndTimeInteger - parseStartTimeInteger;
 			double hoursWorked = Math.ceil((timeWorked)/100.0);
 			return (int)(hoursWorked) * 15; // Shift started and ended prior to 11 PM return hours worked * 15 for wage.
-		}
+			
+			
+		 }
 		
+			
+			
+			//If the time starts before 11 PM and the time ends after 11 PM only left over possible case.
 		
-		
-		
-		timeWorked = Math.abs(parseEndTimeInteger - parseStartTimeInteger);
-		System.out.println("Time worked: " + timeWorked);
-		double hoursWorked = Math.ceil((twentyFourHours - timeWorked)/100.0);
-		System.out.println("Hours worked: " + hoursWorked);
-		int totalPay = (int)hoursWorked * 15;
-		System.out.println();
-
-		return totalPay;
+			
+			
+			
+			int startTimeWorked = elevenPM - parseStartTimeInteger;
+			double startHoursWorked = Math.ceil((startTimeWorked)/100.0);
+			int startTimeWorkedTotalPay = 15 * (int)startHoursWorked;    //15 dollars prior to 11 PM.
+			System.out.println(startTimeWorkedTotalPay);
+			double endTimeWorked = Math.ceil(((twentyFourHours) - (elevenPM - parseEndTimeInteger))/100.0);
+			int EndTimeWorkedTotalPay = 20 * (int)endTimeWorked;    //20 dollars after to 11 PM.
+			System.out.println(EndTimeWorkedTotalPay);
+		return EndTimeWorkedTotalPay + startTimeWorkedTotalPay;
 	}
 	
 	
-
+	
 
 
 }
