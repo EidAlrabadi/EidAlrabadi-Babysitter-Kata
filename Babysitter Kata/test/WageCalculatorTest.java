@@ -31,10 +31,20 @@ class WageCalculatorTest {
 	@Test
 	public void familyABeforeEleven11PMOnlyWageCalculation2 () {
 		wageCalculator = new WageCalculator(startTime,endTime);
-		wageCalculator.setStartTime("18:52");  //From 5Pm to 10:59 PM
+		wageCalculator.setStartTime("18:52");  
 		wageCalculator.setEndTime("19:59");
 		assertEquals(30,wageCalculator.familyAWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
 	}
+	
+	
+	@Test
+	public void familyABeforeEleven11PMAndAfterWageCalculation () {
+		wageCalculator = new WageCalculator(startTime,endTime);
+		wageCalculator.setStartTime("17:00");  // from 5:00 PM to 2:59 AM
+		wageCalculator.setEndTime("02:59");
+		assertEquals(170,wageCalculator.familyAWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
+	}
+	
 	
 	
 	
