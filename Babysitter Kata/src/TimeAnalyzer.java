@@ -31,7 +31,7 @@ public class TimeAnalyzer {
 		}
 		
 		String convertedFormatString = convertedFormat.toString();
-		System.out.println(convertedFormatString);
+		
 		if(convertedFormatString.equals(exactStart) || convertedFormatString.equals(exactEnd)) {
 			return convertedFormatString;
 		}
@@ -83,8 +83,6 @@ public class TimeAnalyzer {
 			}
 			
 			return false;
-			
-			
 			
 			
 		}
