@@ -96,11 +96,39 @@ public class InputAnalyzerTest {
 	}
 	
 	@Test public void ProperStartTimeAndEndTime2() {
+		String startTime = "18:53";
+		String endTime = "22:16";
+		assertEquals(true,timeAnalyzer.timeChecker(startTime, endTime));
+	}
+	@Test public void ProperStartTimeAndEndTime3() {
 		String startTime = "17:00";
 		String endTime = "01:00";
 		assertEquals(true,timeAnalyzer.timeChecker(startTime, endTime));
 	}
 	
+	@Test public void ProperStartTimeAndEndTime4() {
+		String startTime = "17:00";
+		String endTime = "02:53";
+		assertEquals(true,timeAnalyzer.timeChecker(startTime, endTime));
+	}
+	
+	@Test public void ProperStartTimeAndEndTime5() {
+		String startTime = "19:00";
+		String endTime = "04:00";
+		assertEquals(true,timeAnalyzer.timeChecker(startTime, endTime));
+	}
+	
+	@Test public void ProperStartTimeAndEndTime6() {
+		String startTime = "01:40";
+		String endTime = "02:43";
+		assertEquals(true,timeAnalyzer.timeChecker(startTime, endTime));
+	}
+	
+	@Test public void ProperStartTimeAndEndTime7() {
+		String startTime = "01:40";
+		String endTime = "17:43";
+		assertEquals(false,timeAnalyzer.timeChecker(startTime, endTime));
+	}
 	
 	
 	

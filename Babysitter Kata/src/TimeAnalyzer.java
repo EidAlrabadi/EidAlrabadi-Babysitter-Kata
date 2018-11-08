@@ -65,14 +65,20 @@ public class TimeAnalyzer {
 			String parsingStartTime = startTime.substring(0,2) + startTime.substring(3,5); //parses the string to retrieve the time value excluding :
 			String parsingEndTime =  endTime.substring(0,2) + endTime.substring(3,5);     // input "16:53" becomes "1653" for later calculations
 			
+			char firstCharacterStartTime = parsingStartTime.charAt(0);
+			char firstCharacterEndTime = parsingEndTime.charAt(0);
+
 			int startTimeInteger = Integer.parseInt(parsingStartTime); //Converting string to int for arithmetic
 			int endTimeInteger = Integer.parseInt(parsingEndTime);
 			
-			if(parsingStartTime.charAt(0) != '0' && parsingEndTime.charAt(0) == '0') {
+			if(firstCharacterStartTime!= '0' && firstCharacterEndTime == '0') {
 				return true;
+				
+			}else if(firstCharacterStartTime == '0' && firstCharacterEndTime != '0') {
+				return false;
 			}
 			
-			if(startTimeInteger - endTimeInteger < 0) {
+			else if(startTimeInteger - endTimeInteger < 0) {
 				return true;
 			}
 			
