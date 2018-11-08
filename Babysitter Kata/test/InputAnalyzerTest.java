@@ -100,36 +100,47 @@ public class InputAnalyzerTest {
 		String endTime = "22:16";
 		assertEquals(true,timeAnalyzer.timeChecker(startTime, endTime));
 	}
-	@Test public void ProperStartTimeAndEndTime3() {
+	@Test public void ProperStartTimeAndEndTimeSecondTimeBeginsWithZero() {
 		String startTime = "17:00";
 		String endTime = "01:00";
 		assertEquals(true,timeAnalyzer.timeChecker(startTime, endTime));
 	}
 	
-	@Test public void ProperStartTimeAndEndTime4() {
+	@Test public void ProperStartTimeAndEndTimeSecondTimeBeginsWithZeroTwo() {
 		String startTime = "17:00";
 		String endTime = "02:53";
 		assertEquals(true,timeAnalyzer.timeChecker(startTime, endTime));
 	}
 	
-	@Test public void ProperStartTimeAndEndTime5() {
+	@Test public void ProperStartTimeAndEndTimeSecondTimeBeginsWithZeroThree() {
 		String startTime = "19:00";
 		String endTime = "04:00";
 		assertEquals(true,timeAnalyzer.timeChecker(startTime, endTime));
 	}
 	
-	@Test public void ProperStartTimeAndEndTime6() {
+	@Test public void ProperStartTimeAndEndTimeBothTimesBeginWithZero() {
 		String startTime = "01:40";
 		String endTime = "02:43";
 		assertEquals(true,timeAnalyzer.timeChecker(startTime, endTime));
 	}
 	
-	@Test public void ProperStartTimeAndEndTime7() {
+	@Test public void improperStartTimeAndEndTimeStartTimeBeginsWithZero() {
 		String startTime = "01:40";
 		String endTime = "17:43";
 		assertEquals(false,timeAnalyzer.timeChecker(startTime, endTime));
 	}
 	
+	@Test public void improperStartTimeAndEndTimeBothTimesBegnWithOne() {
+		String startTime = "19:53";
+		String endTime = "17:43";
+		assertEquals(false,timeAnalyzer.timeChecker(startTime, endTime));
+	}
+	
+	@Test public void improperStartTimeAndEndTimeBothTimesBegnWithZero() {
+		String startTime = "02:53";
+		String endTime = "01:43";
+		assertEquals(false,timeAnalyzer.timeChecker(startTime, endTime));
+	}
 	
 	
 	
