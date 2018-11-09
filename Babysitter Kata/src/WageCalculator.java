@@ -103,7 +103,40 @@ public class WageCalculator {
 	
 	
 	
-	
+	public int familyBWageCalculation(String startTime, String endTime) {
+		String parsingStartTime = startTime.substring(0, 2) + startTime.substring(3, 5); // parses the string to
+		 
+ 
+		String parsingEndTime = endTime.substring(0, 2) + endTime.substring(3, 5); // input "16:53" becomes "1653" for
+
+		int timeWorked;
+		int twentyFourHours = 2400;
+		int tenPM = 2200;
+
+		int parseStartTimeInteger = Integer.parseInt(parsingStartTime);
+		int parseEndTimeInteger = Integer.parseInt(parsingEndTime);
+
+		char firstCharStartTime = parsingStartTime.charAt(0);
+		char firstCharEndTime = parsingEndTime.charAt(0);
+
+		String firstTwoCharStartTime = parsingStartTime.substring(0, 2);
+		String firstTwoCharEndTime = parsingEndTime.substring(0, 2);
+		
+		
+		
+		//Start before 10 PM and end before 10 PM
+		if(parseEndTimeInteger < tenPM) {
+			timeWorked = parseEndTimeInteger - parseStartTimeInteger;
+			double hoursWorked = Math.ceil((timeWorked) / 100.0);
+			return (int)hoursWorked * 12;
+		}
+		
+		
+		return 0;
+		
+		
+
+	}
 	
 	
 	
