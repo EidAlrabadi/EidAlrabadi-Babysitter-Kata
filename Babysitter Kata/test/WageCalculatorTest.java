@@ -149,11 +149,31 @@ class WageCalculatorTest {
 	}
 	@Test void familyBStartTimeAfter12AMAndEndTimeAfter12AM_3() {
 		wageCalculator = new WageCalculator(startTime,endTime);
-		wageCalculator.setStartTime("00:00");    //01:05 AM
-		wageCalculator.setEndTime("04:00");      //02:37 AM 
-												 //1 hour 32 minutes elapsed.
+		wageCalculator.setStartTime("00:00");    //12:00 AM
+		wageCalculator.setEndTime("04:00");      //04:00 AM 
+												 //4 hour elapsed.
 		assertEquals(64,wageCalculator.familyBWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
 	}
+	
+	
+	// these are the test cases that will span all 3 different pay intervals.
+	@Test void familyBSAllThreeDifferentIntervals() {
+		wageCalculator = new WageCalculator(startTime,endTime);
+		wageCalculator.setStartTime("17:05");    //5:05 PM
+		wageCalculator.setEndTime("02:30");      //02:30 AM 
+												 //9 hours 15 minutes elapsed.
+		assertEquals(124,wageCalculator.familyBWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
+	}
+	
+	
+	@Test void familyBSAllThreeDifferentIntervals_2() {
+		wageCalculator = new WageCalculator(startTime,endTime);
+		wageCalculator.setStartTime("19:55");    //7:55 PM
+		wageCalculator.setEndTime("03:59");      //03:59 AM 
+												 //9 hours 15 minutes elapsed.
+		assertEquals(116,wageCalculator.familyBWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
+	}
+	
 	
 	
 	//Tear down method after all the tests are completed.

@@ -121,10 +121,31 @@ public class WageCalculator {
 		char firstStartTimeChar = parsingStartTime.charAt(0);
 		char firstEndTimeChar = parsingEndTime.charAt(0);
 		
+		//Time span across all 3 different pay intervals.
 		
+		if(parseStartTimeInteger < tenPM && firstStartTimeChar != '0' &&firstEndTimeChar == '0') {
+			//payment prior to 10 pm
+			int netPay = 0;
+			int firstIntervalHoursWorked = tenPM - parseStartTimeInteger;
+			double hoursWorked = Math.ceil((firstIntervalHoursWorked) / 100.0);
+			netPay += (int)hoursWorked * 12;
+			
+			//payment after 10pm but before 12 AM because it is after 12 PM that it ends we can assume the full two hours
+			// are reached, and so we can automatically add 16.
+			
+			netPay += 16;             //2 hours of work between 10 pm and 12 am.
+			
+			//payment after 12 am
+		
+			double thirdIntervalHoursWorked = Math.ceil((parseEndTimeInteger)/100.0);  //only remaining time is the end time.
+			netPay += (int)thirdIntervalHoursWorked * 16;							   // 16 after end time
+			return netPay;
+			
+			
+		}
 		
 		// if start time and end time are after 12:00 AM
-		if(firstStartTimeChar == '0' && firstEndTimeChar == '0') {
+		else if(firstStartTimeChar == '0' && firstEndTimeChar == '0') {
 			timeWorked = parseEndTimeInteger - parseStartTimeInteger;
 			double hoursWorked = Math.ceil((timeWorked) / 100.0);
 			return (int)hoursWorked * 16;
