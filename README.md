@@ -29,6 +29,8 @@ Deliverable:
 
 Calculate total pay, based on babysitter start and end time, and a family.  
 
+Inputs are given by the user in the console, all improper inputs for specific reasons will display an error, and the exact
+reason the input was rejected. It will continually ask until proper inputs are given. Once the proper input is given, it will display the wage. To test it with different data simply rerun the program. 
 
 
 
