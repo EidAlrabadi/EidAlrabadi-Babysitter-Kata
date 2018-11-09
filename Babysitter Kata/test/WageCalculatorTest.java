@@ -176,7 +176,7 @@ class WageCalculatorTest {
 	
 	// these are the test cases that will span 2 different intervals. After 10PM
 	
-	@Test void familyBTwoDifferentIntervals_2() {
+	@Test void familyBTwoDifferentIntervals() {
 		wageCalculator = new WageCalculator(startTime,endTime);
 		wageCalculator.setStartTime("22:30");    //10:30 PM
 		wageCalculator.setEndTime("02:30");      //02:30 AM 
@@ -185,6 +185,24 @@ class WageCalculatorTest {
 		assertEquals(64,wageCalculator.familyBWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
 	}
 	
+	
+	@Test void familyBTwoDifferentIntervals_2() {
+		wageCalculator = new WageCalculator(startTime,endTime);
+		wageCalculator.setStartTime("23:15");    //11:15 PM
+		wageCalculator.setEndTime("03:45");      //03:45 AM 
+												 //4 hours elapsed
+												
+		assertEquals(72,wageCalculator.familyBWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
+	}
+	
+	@Test void familyBTwoDifferentIntervals_3() {
+		wageCalculator = new WageCalculator(startTime,endTime);
+		wageCalculator.setStartTime("23:59");    //10:30 PM
+		wageCalculator.setEndTime("01:59");      //02:30 AM 
+												 //4 hours elapsed
+												
+		assertEquals(40,wageCalculator.familyBWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
+	}
 	
 	
 	//Tear down method after all the tests are completed.
