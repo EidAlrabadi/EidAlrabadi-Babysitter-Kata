@@ -30,6 +30,7 @@ public class WageCalculator {
 	/**
 	 * 
 	 * This method calculates the baby sitter wage if working for family A.
+	 * Assumes proper start and end time inputs.
 	 * 
 	 * @return
 	 */
@@ -157,6 +158,14 @@ public class WageCalculator {
 		return netPay;
 
 	}
+	
+	
+	/**
+	 * 
+	 * 
+	 * Returns the wage earned if working for family C. Assumes proper start and end time inputs.
+	 * @return the wage calculation if the baby sitter was working for family C
+	 */
 
 	public static int familyCWageCalculation(String startTime, String endTime) {
 
@@ -205,6 +214,15 @@ public class WageCalculator {
 
 	}
 
+	/**
+	 * 
+	 * This method grabs the input of the user for the family. User can either enter lower or upper case a,b,c
+	 * if user doesn't enter any of those it will repeatedly ask until it is done.
+	 * 
+	 * @return the letter 'A', 'B' or 'C'.
+	 */
+	
+	
 	public static String getFamilyFromUser() {
 		Scanner in = new Scanner(System.in);
 		System.out.print("Which family are you working for please enter 'A', 'B', 'C': ");
