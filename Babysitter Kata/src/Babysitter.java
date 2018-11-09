@@ -19,7 +19,7 @@ public class Babysitter {
 
 		}
 		
-		System.out.println("Your pay for working between " + TimeAnalyzer.getUserStartTime() + " and " + TimeAnalyzer.getUserEndTime() + " for family " + familyInput + " is " + "$" + babySitterPay);
+		System.out.println("Your pay for working between " + TimeAnalyzer.getUserStartTime() + " and " + TimeAnalyzer.getUserEndTime() + " for family " + familyInput.toUpperCase() + " is " + "$" + babySitterPay);
 	
 	
 		

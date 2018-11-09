@@ -109,16 +109,16 @@ public class TimeAnalyzer {
 				
 				
 			}else if(firstCharacterStartTime == '0' && firstCharacterEndTime != '0') {
-				System.out.println("Error! start time cannot be after end time!");
+				System.out.println("Error! START time cannot be after end time!");
 				return false;
 			}
 			
-			else if(startTimeInteger - endTimeInteger < 0) {
+			else if(startTimeInteger - endTimeInteger <= 0) {
 				return true;                    }
 			
 			
 			
-			System.out.println("Error! end time cannot be before start time");
+			System.out.println("Error! END time cannot be before start time");
 			return false;
 			
 			

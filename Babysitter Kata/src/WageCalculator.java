@@ -44,6 +44,8 @@ public class WageCalculator {
 
 		int parseStartTimeInteger = Integer.parseInt(parsingStartTime);
 		int parseEndTimeInteger = Integer.parseInt(parsingEndTime);
+		
+		
 
 		// if times are after midnight I added 2400 to keep the theme of them being
 		// "greater" than 12 AM
@@ -55,7 +57,6 @@ public class WageCalculator {
 		if (parseEndTimeInteger <= 400) {
 			parseEndTimeInteger += 2400;
 		}
-
 		// shift ends prior to 11 PM
 		if (parseEndTimeInteger <= elevenPM) {
 			timeWorked = parseEndTimeInteger - parseStartTimeInteger;
