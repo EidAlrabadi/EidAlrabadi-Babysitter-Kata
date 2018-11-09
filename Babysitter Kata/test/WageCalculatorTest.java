@@ -147,7 +147,13 @@ class WageCalculatorTest {
 												 //1 hour 32 minutes elapsed.
 		assertEquals(32,wageCalculator.familyBWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
 	}
-	
+	@Test void familyBStartTimeAfter12AMAndEndTimeAfter12AM_3() {
+		wageCalculator = new WageCalculator(startTime,endTime);
+		wageCalculator.setStartTime("00:00");    //01:05 AM
+		wageCalculator.setEndTime("04:00");      //02:37 AM 
+												 //1 hour 32 minutes elapsed.
+		assertEquals(64,wageCalculator.familyBWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
+	}
 	
 	
 	//Tear down method after all the tests are completed.
