@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TimeAnalyzer {
@@ -174,12 +175,16 @@ public class TimeAnalyzer {
 		 * @return boolean determing if the times are valid
 		 */
 		
-		public boolean validateStartAndEndTime(String startTime, String endTime) {
+		public ArrayList<String> validateStartAndEndTime(String startTime, String endTime) {
+			ArrayList<String> times = new ArrayList<String>();
 			while(!timeChecker(startTime,endTime)) {
 				startTime = getStartTimeFromUser();
 				endTime = getEndTimeFromUser();
 			}
-			return true;
+			times.add(startTime);
+			times.add(endTime);
+			
+			return times;
 		}
 		
 		

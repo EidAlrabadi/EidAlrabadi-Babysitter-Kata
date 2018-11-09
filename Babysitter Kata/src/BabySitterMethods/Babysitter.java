@@ -1,4 +1,5 @@
 package BabySitterMethods;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Babysitter {
@@ -10,15 +11,18 @@ public class Babysitter {
 		System.out.println();
 		String endTime = timeAnalyzer.getEndTimeFromUser();   // Retrieve end time from user
 		System.out.println();
-		timeAnalyzer.validateStartAndEndTime(startTime, endTime); // Input format is correct, checking if end time is after start time
+		ArrayList<String> times = timeAnalyzer.validateStartAndEndTime(startTime, endTime); // Input format is correct, checking if end time is after start time
 		String familyInput = WageCalculator.getFamilyFromUser();  // Decides which family the user has entered
+		
+		String validatedStartTimes = times.get(0);
+		String validatedEndTimes = times.get(1);
 		if(familyInput.equals("a")) { //if family A do wage A calculation
-			babySitterPay = WageCalculator.familyAWageCalculation(startTime,endTime);
+			babySitterPay = WageCalculator.familyAWageCalculation(validatedStartTimes,validatedEndTimes);
 		}else if(familyInput.equals("b")) { //if family B do wage B calculation
-			babySitterPay = WageCalculator.familyBWageCalculation(startTime,endTime);
+			babySitterPay = WageCalculator.familyBWageCalculation(validatedStartTimes,validatedEndTimes);
 
 		}else if(familyInput.equals("c")) {  //if family C do wage C calculation
-			babySitterPay = WageCalculator.familyCWageCalculation(startTime,endTime);
+			babySitterPay = WageCalculator.familyCWageCalculation(validatedStartTimes,validatedEndTimes);
 
 		}
 		System.out.println();
