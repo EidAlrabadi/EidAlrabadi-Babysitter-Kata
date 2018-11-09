@@ -24,11 +24,20 @@ public class WageCalculator {
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
+	
+	
+	
+	/**
+	 * 
+	 * This method calculates the baby sitter wage if working for family A. 
+	 * 
+	 * @return
+	 */
 
 	public int familyAWageCalculation(String startTime, String endTime) {
 		String parsingStartTime = startTime.substring(0, 2) + startTime.substring(3, 5); // parses the string to
 																							// retrieve the time value
-																							// excluding :
+		// excluding :
 		String parsingEndTime = endTime.substring(0, 2) + endTime.substring(3, 5); // input "16:53" becomes "1653" for
 																					// later calculations
 
@@ -41,13 +50,28 @@ public class WageCalculator {
 
 		char firstCharStartTime = parsingStartTime.charAt(0);
 		char firstCharEndTime = parsingEndTime.charAt(0);
+		
+		String firstTwoCharStartTime = parsingStartTime.substring(0, 2);
+		String firstTwoCharEndTime = parsingEndTime.substring(0, 2);
 
-		// If both times are after 11 PM.
-		if (firstCharStartTime == '0' && firstCharEndTime == '0') {
+		
+		//if both times are between 11PM and 11 PM.
+		if (firstTwoCharStartTime.equals("23") && firstTwoCharEndTime.equals("23")) {
 			timeWorked = Math.abs(parseEndTimeInteger - parseStartTimeInteger);
 			double hoursWorked = Math.ceil((timeWorked) / 100.0);
 
-			return (int) (hoursWorked) * 20; // Shift started and ended prior to 11 PM return hours worked * 15 for
+			return (int) (hoursWorked) * 20; // Shift started and ended prior to 11 PM return hours worked * 20 for
+												// wage.
+		}
+		
+		
+
+		// If both times are after 11 PM.
+		else if (firstCharStartTime == '0' && firstCharEndTime == '0') {
+			timeWorked = Math.abs(parseEndTimeInteger - parseStartTimeInteger);
+			double hoursWorked = Math.ceil((timeWorked) / 100.0);
+
+			return (int) (hoursWorked) * 20; // Shift started and ended prior to 11 PM return hours worked * 20 for
 												// wage.
 		}
 
@@ -75,6 +99,43 @@ public class WageCalculator {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
-}
