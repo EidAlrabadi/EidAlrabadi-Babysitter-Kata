@@ -121,9 +121,20 @@ public class WageCalculator {
 		char firstStartTimeChar = parsingStartTime.charAt(0);
 		char firstEndTimeChar = parsingEndTime.charAt(0);
 		
-		//Time span across all 3 different pay intervals.
+		//Time span across 2 different pay intervals.
 		
-		if(parseStartTimeInteger < tenPM && firstStartTimeChar != '0' &&firstEndTimeChar == '0') {
+		if(parseStartTimeInteger >= tenPM && parseEndTimeInteger <= 400) {
+			int netPay = 0;
+			int firstIntervalHoursWorked = twelveAM - parseStartTimeInteger;
+			double hoursWorkedIntervalOne = Math.ceil((firstIntervalHoursWorked) / 100.0);
+			netPay += hoursWorkedIntervalOne * 8;
+			double hoursWorkedIntervalTwo = Math.ceil((parseEndTimeInteger)/100.0);
+			netPay += hoursWorkedIntervalTwo * 16;
+			return netPay;
+			
+		}
+		
+		else if(parseStartTimeInteger < tenPM && firstStartTimeChar != '0' &&firstEndTimeChar == '0') {
 			//payment prior to 10 pm
 			int netPay = 0;
 			int firstIntervalHoursWorked = tenPM - parseStartTimeInteger;
@@ -154,7 +165,7 @@ public class WageCalculator {
 		
 		//if start time is 10 or higher, and end time is 12:00 AM or lower
 		
-		if(parseStartTimeInteger >= tenPM && parseEndTimeInteger <= twelveAM || parseStartTimeInteger >= tenPM && parseEndTimeInteger == 0) {
+		else if(parseStartTimeInteger >= tenPM && parseEndTimeInteger <= twelveAM || parseStartTimeInteger >= tenPM && parseEndTimeInteger == 0) {
 			//if end time is exactly 12AM
 			if(parseEndTimeInteger == 0) {
 			int realParseEndTimeInteger = parseEndTimeInteger + twelveAM;
