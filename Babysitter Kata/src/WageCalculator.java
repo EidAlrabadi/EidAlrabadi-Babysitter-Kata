@@ -118,18 +118,29 @@ public class WageCalculator {
 
 		
 
-		String firstTwoCharStartTime = parsingStartTime.substring(0, 2);
-		String firstTwoCharEndTime = parsingEndTime.substring(0, 2);
+		char firstStartTimeChar = parsingStartTime.charAt(0);
+		char firstEndTimeChar = parsingEndTime.charAt(0);
+		
+		
+		
+		// if start time and end time are after 12:00 AM
+		if(firstStartTimeChar == '0' && firstEndTimeChar == '0') {
+			timeWorked = parseEndTimeInteger - parseStartTimeInteger;
+			double hoursWorked = Math.ceil((timeWorked) / 100.0);
+			return (int)hoursWorked * 16;
+		}
 		
 		
 		//if start time is 10 or higher, and end time is 12:00 AM or lower
 		
 		if(parseStartTimeInteger >= tenPM && parseEndTimeInteger <= twelveAM || parseStartTimeInteger >= tenPM && parseEndTimeInteger == 0) {
+			//if end time is exactly 12AM
 			if(parseEndTimeInteger == 0) {
 			int realParseEndTimeInteger = parseEndTimeInteger + twelveAM;
 			timeWorked = realParseEndTimeInteger - parseStartTimeInteger;
 			double hoursWorked = Math.ceil((timeWorked) / 100.0);
 			return (int)hoursWorked * 8;
+			//if end time is not exactly 12 AM but is greater than 11 PM and less than 12 AM.
 			}else {
 				timeWorked = parseEndTimeInteger - parseStartTimeInteger;
 				double hoursWorked = Math.ceil((timeWorked / 100.0));
