@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class WageCalculator {
 
@@ -32,7 +33,7 @@ public class WageCalculator {
 	 * @return
 	 */
 
-	public int familyAWageCalculation(String startTime, String endTime) {
+	public static int familyAWageCalculation(String startTime, String endTime) {
 		String parsingStartTime = startTime.substring(0, 2) + startTime.substring(3, 5); // parses the string to
 																							// retrieve the time value
 		// excluding :
@@ -105,7 +106,7 @@ public class WageCalculator {
 	 * 
 	 * 
 	 */
-	public int familyBWageCalculation(String startTime, String endTime) {
+	public static int familyBWageCalculation(String startTime, String endTime) {
 		String parsingStartTime = startTime.substring(0, 2) + startTime.substring(3, 5); // parses the string to
 
 		String parsingEndTime = endTime.substring(0, 2) + endTime.substring(3, 5); // input "16:53" becomes "1653" for
@@ -196,7 +197,7 @@ public class WageCalculator {
 	
 	
 	
-	public int familyCWageCalculation(String startTime, String endTime) {
+	public static int familyCWageCalculation(String startTime, String endTime) {
 		
 		
 		String parsingStartTime = startTime.substring(0, 2) + startTime.substring(3, 5); // parses the string to
@@ -227,7 +228,7 @@ public class WageCalculator {
 		
 				else if(parseStartTimeInteger >= 2100 && firstCharEndTime == '0') {
 					timeWorked = (int)Math.ceil((twentyFourHours-(parseStartTimeInteger-parseEndTimeInteger)) / 100.0);
-					System.out.println(timeWorked);
+			 
 					return (timeWorked * 15);      
 					
 				}
@@ -264,12 +265,26 @@ public class WageCalculator {
 		return EndTimeWorkedTotalPay + startTimeWorkedTotalPay;
 	}
 		
-		}
+		
+
+public static String getFamilyFromUser() {
+	Scanner in = new Scanner(System.in);
+	System.out.println("Which family are you working for please enter 'A', 'B', 'C''");
+	String familyChar = in.nextLine();
+	String familyInput = familyChar.toLowerCase();
+	while(!familyInput.equals("a") && !familyInput.equals("b") && !familyInput.equals("c")) {
+		System.out.println("Error please enter either family A,B,C by entering the letter");
+		familyChar = in.nextLine();
+		familyInput = familyChar.toLowerCase();
+	}
+	
+	return familyInput;
+}
 	
 	
 	
 	
-	
+}
 	
 	
 
