@@ -124,11 +124,18 @@ public class WageCalculator {
 		
 		//if start time is 10 or higher, and end time is 12:00 AM or lower
 		
-		if(parseStartTimeInteger >= tenPM && parseEndTimeInteger <= (parseEndTimeInteger + twelveAM)) {
+		if(parseStartTimeInteger >= tenPM && parseEndTimeInteger <= twelveAM || parseStartTimeInteger >= tenPM && parseEndTimeInteger == 0) {
+			if(parseEndTimeInteger == 0) {
 			int realParseEndTimeInteger = parseEndTimeInteger + twelveAM;
 			timeWorked = realParseEndTimeInteger - parseStartTimeInteger;
 			double hoursWorked = Math.ceil((timeWorked) / 100.0);
 			return (int)hoursWorked * 8;
+			}else {
+				timeWorked = parseEndTimeInteger - parseStartTimeInteger;
+				double hoursWorked = Math.ceil((timeWorked / 100.0));
+				return (int)hoursWorked * 8;
+			}
+			
 			
 		}
 		
