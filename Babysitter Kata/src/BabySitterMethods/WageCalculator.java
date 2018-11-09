@@ -1,3 +1,4 @@
+package BabySitterMethods;
 import java.util.Scanner;
 
 public class WageCalculator {
