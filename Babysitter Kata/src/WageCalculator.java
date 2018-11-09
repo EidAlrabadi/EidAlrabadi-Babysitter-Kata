@@ -53,19 +53,24 @@ public class WageCalculator {
 		String firstTwoCharEndTime = parsingEndTime.substring(0, 2);
 
 		// if both times are between 11PM and 11 PM.
-		if (firstTwoCharStartTime.equals("23") && firstTwoCharEndTime.equals("23")) {
-			timeWorked = Math.abs(parseEndTimeInteger - parseStartTimeInteger);
-			double hoursWorked = Math.ceil((timeWorked) / 100.0);
-
-			return (int) (hoursWorked) * 20; // Shift started and ended prior to 11 PM return hours worked * 20 for
-												// wage.
+		if (firstTwoCharStartTime.equals("23") && firstTwoCharEndTime.equals("23")) { //Max you can work between is 1 hour so automatically return 20
+		return 20;
 		}
+		
+		// if both times are after 11 pm ,but include 11 pm in the calculation.
+		
+		else if(parseStartTimeInteger >= 2300 && firstCharEndTime == '0') {
+			timeWorked = (int)Math.ceil((twentyFourHours-(parseStartTimeInteger-parseEndTimeInteger)) / 100.0);
+			System.out.println(timeWorked);
+			return (timeWorked * 20);      
+			
+		}
+		
 
-		// If both times are after 11 PM.
+		// If both times are after 11 PM, but don't include 11 PM
 		else if (firstCharStartTime == '0' && firstCharEndTime == '0') {
 			timeWorked = Math.abs(parseEndTimeInteger - parseStartTimeInteger);
 			double hoursWorked = Math.ceil((timeWorked) / 100.0);
-
 			return (int) (hoursWorked) * 20; // Shift started and ended prior to 11 PM return hours worked * 20 for
 												// wage.
 		}
@@ -93,6 +98,13 @@ public class WageCalculator {
 		return EndTimeWorkedTotalPay + startTimeWorkedTotalPay;
 	}
 
+	
+	/**
+	 * 
+	 * This method calculates the sitters wage for family B. Function assumes inputs are proper.
+	 * 
+	 * 
+	 */
 	public int familyBWageCalculation(String startTime, String endTime) {
 		String parsingStartTime = startTime.substring(0, 2) + startTime.substring(3, 5); // parses the string to
 
@@ -176,4 +188,92 @@ public class WageCalculator {
 
 	}
 
-}
+	
+	
+	
+	
+	
+	
+	
+	
+	public int familyCWageCalculation(String startTime, String endTime) {
+		
+		
+		String parsingStartTime = startTime.substring(0, 2) + startTime.substring(3, 5); // parses the string to
+																						// retrieve the time value
+																						// excluding :
+		String parsingEndTime = endTime.substring(0, 2) + endTime.substring(3, 5); // input "16:53" becomes "1653" for
+																				  // later calculations
+		
+		int timeWorked;
+		int twentyFourHours = 2400;
+		int ninePM = 2100;
+
+		int parseStartTimeInteger = Integer.parseInt(parsingStartTime);
+		int parseEndTimeInteger = Integer.parseInt(parsingEndTime);
+
+		char firstCharStartTime = parsingStartTime.charAt(0);
+		char firstCharEndTime = parsingEndTime.charAt(0);
+
+		String firstTwoCharStartTime = parsingStartTime.substring(0, 2);
+		String firstTwoCharEndTime = parsingEndTime.substring(0, 2);
+
+// if both times are between 9PM and 9PM.
+		if (firstTwoCharStartTime.equals("21") && firstTwoCharEndTime.equals("21")) {
+			return 21;
+		}
+
+		// if both times are after 11 pm ,but include 11 pm in the calculation.
+		
+				else if(parseStartTimeInteger >= 2100 && firstCharEndTime == '0') {
+					timeWorked = (int)Math.ceil((twentyFourHours-(parseStartTimeInteger-parseEndTimeInteger)) / 100.0);
+					System.out.println(timeWorked);
+					return (timeWorked * 15);      
+					
+				}
+				
+		// If both times are after 9
+		else if (parseStartTimeInteger >= ninePM || firstCharStartTime == '0' && firstCharEndTime == '0') {
+			timeWorked = Math.abs(parseEndTimeInteger - parseStartTimeInteger);
+			double hoursWorked = Math.ceil((timeWorked) / 100.0);
+			
+			return (int) (hoursWorked) * 15;
+		}
+
+		// If both times are prior to 9 PM.
+		else if (parseStartTimeInteger < ninePM && parseEndTimeInteger < ninePM && firstCharStartTime != '0'
+				&& firstCharEndTime != '0') {
+			timeWorked = parseEndTimeInteger - parseStartTimeInteger;
+			double hoursWorked = Math.ceil((timeWorked) / 100.0);
+		
+			return (int) (hoursWorked) *21; // Shift started and ended prior to 9 PM return hours worked * 21 for
+			// wage.
+
+		}
+
+// If the time starts before 9 PM and the time ends after 9 PM only left over
+// possible case.
+
+		int startTimeWorked = ninePM - parseStartTimeInteger;
+		double startHoursWorked = Math.ceil((startTimeWorked) / 100.0);
+		int startTimeWorkedTotalPay = 21 * (int) startHoursWorked; // 21 dollars prior to 9 PM.
+
+		double endTimeWorked = Math.ceil(((twentyFourHours) - (ninePM - parseEndTimeInteger)) / 100.0);
+		int EndTimeWorkedTotalPay = 15 * (int) endTimeWorked; // 15 dollars after to 9 PM.
+		
+		return EndTimeWorkedTotalPay + startTimeWorkedTotalPay;
+	}
+		
+		}
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+

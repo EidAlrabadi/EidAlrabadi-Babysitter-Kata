@@ -19,7 +19,7 @@ class WageCalculatorTest {
 	//Since only proper inputs will get to this point, I will only test proper inputs since that is the only
 	// possible scenario that will occur, due to the error catching of the previous methods.
 	
-	
+	// Family A test cases
 	@Test
 	public void familyABefore11PMOnlyWageCalculation () {
 		wageCalculator = new WageCalculator(startTime,endTime);
@@ -40,7 +40,7 @@ class WageCalculatorTest {
 	@Test
 	public void familyAAfter11PMWageCalculation() {
 		wageCalculator = new WageCalculator(startTime,endTime);
-		wageCalculator.setStartTime("00:00");  // from 5:00 PM to 2:59 AM
+		wageCalculator.setStartTime("00:00");  // from 12 AM to 3:59 AM
 		wageCalculator.setEndTime("03:59");
 		assertEquals(80,wageCalculator.familyAWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
 	}
@@ -48,7 +48,7 @@ class WageCalculatorTest {
 	@Test
 	public void familyAAfter11PMWageCalculation_2() {
 		wageCalculator = new WageCalculator(startTime,endTime);
-		wageCalculator.setStartTime("01:00");  // from 5:00 PM to 2:59 AM
+		wageCalculator.setStartTime("01:00");  // from 1 AM to 2:43 AM
 		wageCalculator.setEndTime("02:43");
 		assertEquals(40,wageCalculator.familyAWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
 	}
@@ -61,6 +61,23 @@ class WageCalculatorTest {
 		assertEquals(20,wageCalculator.familyAWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
 	}
 	
+	@Test
+	public void familyAAfter11PMWageCalculation_4() {
+		wageCalculator = new WageCalculator(startTime,endTime);
+		wageCalculator.setStartTime("23:15");  
+		wageCalculator.setEndTime("02:15");
+		assertEquals(60,wageCalculator.familyAWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
+		
+		
+	}
+	
+	@Test
+	public void familyAAfter9PMWageCalculation_5() {
+		wageCalculator = new WageCalculator(startTime,endTime);
+		wageCalculator.setStartTime("00:00");  // from 12 AM to 3:59 AM 3 hours 59 minutes elapsed.
+		wageCalculator.setEndTime("03:59");
+		assertEquals(80,wageCalculator.familyAWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
+	}
 	@Test
 	public void familyAStartBefore11PMEndAfter11PM() {
 		wageCalculator = new WageCalculator(startTime,endTime);
@@ -89,6 +106,8 @@ class WageCalculatorTest {
 		assertEquals(160,wageCalculator.familyAWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
 	}
 	
+	
+	//Family B test cases
 	
 	@Test void familyBStartTimeBefore10PMEndTimeBefore10PM() {
 		wageCalculator = new WageCalculator(startTime,endTime);
@@ -203,6 +222,82 @@ class WageCalculatorTest {
 												
 		assertEquals(40,wageCalculator.familyBWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
 	}
+	
+	
+	//Family C test cases. Since C and A are the same calculation with minor differences in the variable values.
+	// test cases are the same, but adjusted for the different times.
+	
+	
+	@Test
+	public void familyCBefore9PMOnlyWageCalculation () {
+		wageCalculator = new WageCalculator(startTime,endTime);
+		wageCalculator.setStartTime("17:00");  //From 5Pm to 8:30 
+		wageCalculator.setEndTime("20:30");	   //3 hours 30 minutes elapsed
+		assertEquals(84,wageCalculator.familyCWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
+	}
+	
+	@Test
+	public void familyCBefore9PMOnlyWageCalculation_2 () {
+		wageCalculator = new WageCalculator(startTime,endTime);
+		wageCalculator.setStartTime("18:50"); // 6:50 PM to 7:59 PM 1 hour and 9 minutes elapsed  
+		wageCalculator.setEndTime("19:59");
+		assertEquals(42,wageCalculator.familyCWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
+	}
+	
+	
+	@Test
+	public void familyCAfter9PMWageCalculation() {
+		wageCalculator = new WageCalculator(startTime,endTime);
+		wageCalculator.setStartTime("00:00");  // from 12 AM to 3:59 AM 3 hours 59 minutes elapsed.
+		wageCalculator.setEndTime("03:59");
+		assertEquals(60,wageCalculator.familyCWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
+	}
+	
+	@Test
+	public void familyCAfter9PMWageCalculation_2() {
+		wageCalculator = new WageCalculator(startTime,endTime);
+		wageCalculator.setStartTime("21:30");  // from 9:30 PM to 2:43 AM
+		wageCalculator.setEndTime("02:43");
+		assertEquals(90,wageCalculator.familyCWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
+	}
+	
+	@Test
+	public void familyCAfter9PMWageCalculation_3() {
+		wageCalculator = new WageCalculator(startTime,endTime);
+		wageCalculator.setStartTime("21:00");  // 9 Pm to 9:43 PM
+		wageCalculator.setEndTime("21:43");
+		assertEquals(21,wageCalculator.familyCWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
+	}
+	
+	@Test
+	public void familyCStartBefore9PMEndAfter9PM() {
+		wageCalculator = new WageCalculator(startTime,endTime);
+		wageCalculator.setStartTime("18:53");    //6:53 Pm to 3:43 AM   
+		wageCalculator.setEndTime("03:43");
+		assertEquals(168,wageCalculator.familyCWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
+	}
+	
+	@Test
+	public void familyCStartBefore9PMEndAfter9PM_2 () {
+		wageCalculator = new WageCalculator(startTime,endTime);
+		wageCalculator.setStartTime("17:43");
+				  
+		wageCalculator.setEndTime("02:43");
+		assertEquals(174,wageCalculator.familyCWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
+	}
+	
+	
+	
+	@Test
+	public void familyCStartBefore9PMEndAfter9PMStartMinutesIsLarger () {
+		wageCalculator = new WageCalculator(startTime,endTime);
+		wageCalculator.setStartTime("17:59");  
+				  
+		wageCalculator.setEndTime("00:05");  
+		assertEquals(144,wageCalculator.familyCWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
+	}
+	
+	
 	
 	
 	//Tear down method after all the tests are completed.
