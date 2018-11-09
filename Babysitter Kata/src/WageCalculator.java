@@ -91,10 +91,10 @@ public class WageCalculator {
 		int startTimeWorked = elevenPM - parseStartTimeInteger;
 		double startHoursWorked = Math.ceil((startTimeWorked) / 100.0);
 		int startTimeWorkedTotalPay = 15 * (int) startHoursWorked; // 15 dollars prior to 11 PM.
-		System.out.println(startTimeWorkedTotalPay);
+	
 		double endTimeWorked = Math.ceil(((twentyFourHours) - (elevenPM - parseEndTimeInteger)) / 100.0);
 		int EndTimeWorkedTotalPay = 20 * (int) endTimeWorked; // 20 dollars after to 11 PM.
-		System.out.println(EndTimeWorkedTotalPay);
+		
 		return EndTimeWorkedTotalPay + startTimeWorkedTotalPay;
 	}
 	
@@ -110,22 +110,32 @@ public class WageCalculator {
 		String parsingEndTime = endTime.substring(0, 2) + endTime.substring(3, 5); // input "16:53" becomes "1653" for
 
 		int timeWorked;
-		int twentyFourHours = 2400;
 		int tenPM = 2200;
+		int twelveAM = 2400;
 
 		int parseStartTimeInteger = Integer.parseInt(parsingStartTime);
 		int parseEndTimeInteger = Integer.parseInt(parsingEndTime);
 
-		char firstCharStartTime = parsingStartTime.charAt(0);
-		char firstCharEndTime = parsingEndTime.charAt(0);
+		
 
 		String firstTwoCharStartTime = parsingStartTime.substring(0, 2);
 		String firstTwoCharEndTime = parsingEndTime.substring(0, 2);
 		
 		
+		//if start time is 10 or higher, and end time is 12:00 AM or lower
+		
+		if(parseStartTimeInteger >= tenPM && parseEndTimeInteger <= (parseEndTimeInteger + twelveAM)) {
+			int realParseEndTimeInteger = parseEndTimeInteger + twelveAM;
+			timeWorked = realParseEndTimeInteger - parseStartTimeInteger;
+			double hoursWorked = Math.ceil((timeWorked) / 100.0);
+			return (int)hoursWorked * 8;
+			
+		}
+		
 		
 		//Start before 10 PM and end before 10 PM
-		if(parseEndTimeInteger < tenPM) {
+		else if(parseEndTimeInteger < tenPM) {
+			
 			timeWorked = parseEndTimeInteger - parseStartTimeInteger;
 			double hoursWorked = Math.ceil((timeWorked) / 100.0);
 			return (int)hoursWorked * 12;
