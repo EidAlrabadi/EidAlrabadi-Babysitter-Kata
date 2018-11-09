@@ -223,6 +223,14 @@ class WageCalculatorTest {
 		assertEquals(40,wageCalculator.familyBWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
 	}
 	
+	@Test void familyBTwoDifferentIntervals_4() {
+		wageCalculator = new WageCalculator(startTime,endTime);
+		wageCalculator.setStartTime("17:30");    //10:30 PM
+		wageCalculator.setEndTime("23:30");      //02:30 AM 
+												 //4 hours elapsed
+												
+		assertEquals(76,wageCalculator.familyBWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
+	}
 	
 	//Family C test cases. Since C and A are the same calculation with minor differences in the variable values.
 	// test cases are the same, but adjusted for the different times.

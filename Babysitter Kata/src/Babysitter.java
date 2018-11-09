@@ -11,15 +11,15 @@ public class Babysitter {
 		String familyInput = WageCalculator.getFamilyFromUser();
 		if(familyInput.equals("a")) {
 			babySitterPay = WageCalculator.familyAWageCalculation(startTime,endTime);
-		}else if(familyInput.equals('b')) {
+		}else if(familyInput.equals("b")) {
 			babySitterPay = WageCalculator.familyBWageCalculation(startTime,endTime);
 
-		}else if(familyInput.equals('c')) {
+		}else if(familyInput.equals("c")) {
 			babySitterPay = WageCalculator.familyCWageCalculation(startTime,endTime);
 
 		}
 		
-		System.out.println("Your pay for working between " + startTime + " and" + endTime + " for family " + familyInput + " is " + babySitterPay);
+		System.out.println("Your pay for working between " + startTime + " and " + endTime + " for family " + familyInput + " is " + "$" + babySitterPay);
 	
 	
 		

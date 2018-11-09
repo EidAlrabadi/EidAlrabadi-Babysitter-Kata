@@ -121,9 +121,19 @@ public class WageCalculator {
 		char firstStartTimeChar = parsingStartTime.charAt(0);
 		char firstEndTimeChar = parsingEndTime.charAt(0);
 
-		// Time span across 2 different pay intervals.
+		
+		if(parseStartTimeInteger < tenPM && parseEndTimeInteger > tenPM && parseEndTimeInteger < twelveAM ) {
+			int netPay = 0;
+			int firstIntervalHoursWorked = tenPM - parseStartTimeInteger;
+			double hoursWorkedIntervalOne = Math.ceil((firstIntervalHoursWorked) / 100.0);
+			netPay += hoursWorkedIntervalOne * 12;
+			double hoursWorkedIntervalTwo = Math.ceil((parseEndTimeInteger - tenPM) / 100.0);
+			netPay += hoursWorkedIntervalTwo * 8;
+			return netPay;
+			
+		}
 
-		if (parseStartTimeInteger >= tenPM && parseEndTimeInteger <= 400) {
+		else if (parseStartTimeInteger >= tenPM && parseEndTimeInteger <= 400) {
 			int netPay = 0;
 			int firstIntervalHoursWorked = twelveAM - parseStartTimeInteger;
 			double hoursWorkedIntervalOne = Math.ceil((firstIntervalHoursWorked) / 100.0);
@@ -224,7 +234,7 @@ public class WageCalculator {
 			return 21;
 		}
 
-		// if both times are after 11 pm ,but include 11 pm in the calculation.
+		// if both times are after 9 pm ,but include 9 pm in the calculation.
 		
 				else if(parseStartTimeInteger >= 2100 && firstCharEndTime == '0') {
 					timeWorked = (int)Math.ceil((twentyFourHours-(parseStartTimeInteger-parseEndTimeInteger)) / 100.0);
