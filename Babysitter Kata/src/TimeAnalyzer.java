@@ -10,6 +10,36 @@ public class TimeAnalyzer {
 	Scanner in = new Scanner(System.in);
 	
 	
+	private static String userStartTime;  // User input is converted for calculations this keeps track of them
+	private static String userEndTime;  
+	
+	
+	public static String getUserStartTime() {
+		return userStartTime;
+	}
+
+
+
+
+	public void setUserStartTime(String userStartTime) {
+		this.userStartTime = userStartTime;
+	}
+
+
+
+
+	public static String getUserEndTime() {
+		return userEndTime;
+	}
+
+
+
+
+	public void setUserEndTime(String userEndTime) {
+		this.userEndTime = userEndTime;
+	}
+
+
 	/** This is a method that parses a user input string, and returns a boolean value
 	 * to determine if the input is of proper format on the 12 hour clock. The format 
 	 * must look like the following #:## PM or ##:## AM where # stands for accepted values on
@@ -110,7 +140,7 @@ public class TimeAnalyzer {
 				userTimeInput = in.nextLine();
 				time = properTimeInputs(userTimeInput);
 			}
-			
+			setUserStartTime(userTimeInput);
 			return time;
 		}
 		
@@ -130,7 +160,7 @@ public class TimeAnalyzer {
 				userTimeInput = in.nextLine();
 				time = properTimeInputs(userTimeInput);
 			}
-			
+			setUserEndTime(userTimeInput);
 			return time;
 		}
 		
