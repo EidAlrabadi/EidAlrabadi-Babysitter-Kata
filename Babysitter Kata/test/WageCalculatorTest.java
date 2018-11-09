@@ -240,8 +240,8 @@ class WageCalculatorTest {
 	
 	@Test void familyBTwoDifferentIntervals_3() {
 		wageCalculator = new WageCalculator(startTime,endTime);
-		wageCalculator.setStartTime("23:59");    //10:30 PM
-		wageCalculator.setEndTime("01:59");      //02:30 AM 
+		wageCalculator.setStartTime("23:59");    //11:59 PM
+		wageCalculator.setEndTime("01:59");      //1:59 AM 
 											
 												
 		assertEquals(40,wageCalculator.familyBWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
@@ -251,8 +251,8 @@ class WageCalculatorTest {
 	
 	@Test void familyBTwoDifferentIntervals_4() {
 		wageCalculator = new WageCalculator(startTime,endTime);
-		wageCalculator.setStartTime("17:30");    //10:30 PM
-		wageCalculator.setEndTime("23:30");      //2:30 AM 
+		wageCalculator.setStartTime("17:30");    //5:30 PM
+		wageCalculator.setEndTime("23:30");      //11:30 PM 
 												
 												
 		assertEquals(76,wageCalculator.familyBWageCalculation(wageCalculator.getStartTime(), wageCalculator.getEndTime()));
@@ -260,8 +260,8 @@ class WageCalculatorTest {
 	
 	@Test void familyBTwoDifferentIntervals_5() {
 		wageCalculator = new WageCalculator(startTime,endTime);
-		wageCalculator.setStartTime("17:00");    //10:30 PM
-		wageCalculator.setEndTime("00:00");      //02:30 AM 
+		wageCalculator.setStartTime("17:00");    //5:00 PM
+		wageCalculator.setEndTime("00:00");      //12:00 AM 
 		
 												
 												

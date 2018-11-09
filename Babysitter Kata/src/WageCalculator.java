@@ -92,96 +92,76 @@ public class WageCalculator {
 	 * 
 	 */
 	public static int familyBWageCalculation(String startTime, String endTime) {
+		
 		String parsingStartTime = startTime.substring(0, 2) + startTime.substring(3, 5); // parses the string to
-
-		String parsingEndTime = endTime.substring(0, 2) + endTime.substring(3, 5); // input "16:53" becomes "1653" for
-
+		// retrieve the time value
+		// excluding :
+		String parsingEndTime = endTime.substring(0, 2) + endTime.substring(3, 5); // input "16:53" becomes "1653" for																			// later calculations
 		int timeWorked;
 		int tenPM = 2200;
 		int twelveAM = 2400;
-
+		int netPay = 0;
 		int parseStartTimeInteger = Integer.parseInt(parsingStartTime);
 		int parseEndTimeInteger = Integer.parseInt(parsingEndTime);
 
-		char firstStartTimeChar = parsingStartTime.charAt(0);
-		char firstEndTimeChar = parsingEndTime.charAt(0);
 
-		
-		if(parseStartTimeInteger < tenPM && parseEndTimeInteger > tenPM && parseEndTimeInteger < twelveAM ) {
-			int netPay = 0;
-			int firstIntervalHoursWorked = tenPM - parseStartTimeInteger;
-			double hoursWorkedIntervalOne = Math.ceil((firstIntervalHoursWorked) / 100.0);
-			netPay += hoursWorkedIntervalOne * 12;
-			double hoursWorkedIntervalTwo = Math.ceil((parseEndTimeInteger - tenPM) / 100.0);
-			netPay += hoursWorkedIntervalTwo * 8;
-			return netPay;
-			
-		}
 
-		else if (parseStartTimeInteger >= tenPM && parseEndTimeInteger <= 400) {
-			int netPay = 0;
-			int firstIntervalHoursWorked = twelveAM - parseStartTimeInteger;
-			double hoursWorkedIntervalOne = Math.ceil((firstIntervalHoursWorked) / 100.0);
-			netPay += hoursWorkedIntervalOne * 8;
-			double hoursWorkedIntervalTwo = Math.ceil((parseEndTimeInteger) / 100.0);
-			netPay += hoursWorkedIntervalTwo * 16;
-			return netPay;
+		//if times are after midnight I added 2400 to keep the theme of them being "greater" than 12 AM
+		// for calculations.
+	if(parseStartTimeInteger <= 400) {
+		parseStartTimeInteger += 2400;
+	}
 
-		}
-
-		else if (parseStartTimeInteger < tenPM && firstStartTimeChar != '0' && firstEndTimeChar == '0') {
-			// payment prior to 10 pm
-			int netPay = 0;
-			int firstIntervalHoursWorked = tenPM - parseStartTimeInteger;
-			double hoursWorked = Math.ceil((firstIntervalHoursWorked) / 100.0);
-			netPay += (int) hoursWorked * 12;
-
-			// payment after 10pm but before 12 AM because it is after 12 PM that it ends we
-			// can assume the full two hours
-			// are reached, and so we can automatically add 16.
-
-			netPay += 16; // 2 hours of work between 10 pm and 12 am.
-
-			// payment after 12 am
-
-			double thirdIntervalHoursWorked = Math.ceil((parseEndTimeInteger) / 100.0); // only remaining time is the
-																						// end time.
-			netPay += (int) thirdIntervalHoursWorked * 16; // 16 after end time
-			return netPay;
-
-		}
-
-		// if start time and end time are after 12:00 AM
-		else if (firstStartTimeChar == '0' && firstEndTimeChar == '0') {
-			timeWorked = parseEndTimeInteger - parseStartTimeInteger;
-			double hoursWorked = Math.ceil((timeWorked) / 100.0);
-			return (int) hoursWorked * 16;
-		}
-
-		// if start time is 10 or higher, and end time is 12:00 AM or lower
-
-		else if (parseStartTimeInteger >= tenPM && parseEndTimeInteger <= twelveAM
-				|| parseStartTimeInteger >= tenPM && parseEndTimeInteger == 0) {
-			// if end time is exactly 12AM
-			if (parseEndTimeInteger == 0) {
-				int realParseEndTimeInteger = parseEndTimeInteger + twelveAM;
-				timeWorked = realParseEndTimeInteger - parseStartTimeInteger;
-				double hoursWorked = Math.ceil((timeWorked) / 100.0);
-				return (int) hoursWorked * 8;
-				// if end time is not exactly 12 AM but is greater than 11 PM and less than 12
-				// AM.
-			} else {
-				timeWorked = parseEndTimeInteger - parseStartTimeInteger;
-				double hoursWorked = Math.ceil((timeWorked / 100.0));
-				return (int) hoursWorked * 8;
-			}
-
-		}
-
+	if(parseEndTimeInteger <= 400) {
+		parseEndTimeInteger += 2400;	
+	
+	}
+	
+	//starts before 10 PM and ends before 10 PM
+	
+	if(parseEndTimeInteger <= tenPM) {
 		timeWorked = parseEndTimeInteger - parseStartTimeInteger;
-		double hoursWorked = Math.ceil((timeWorked) / 100.0);
-		return (int) hoursWorked * 12;
+		return 12 * (int)Math.ceil(timeWorked/100.0);
 
+	// between 10 PM and 12 AM
+	}else if(parseStartTimeInteger >= tenPM && parseEndTimeInteger <= twelveAM) {
+		timeWorked = parseEndTimeInteger - parseStartTimeInteger;
+		return 8 * (int)Math.ceil(timeWorked/100.0);
+	//both times after 12 AM
+	}else if(parseStartTimeInteger >= twelveAM && parseEndTimeInteger >= twelveAM) {
+		timeWorked = parseEndTimeInteger - parseStartTimeInteger;
+		return 16 * (int)Math.ceil(timeWorked/100.0);
+	//spans all 3 intervals
+	}else if(parseStartTimeInteger < tenPM && parseEndTimeInteger > twelveAM ) {
+		timeWorked = tenPM - parseStartTimeInteger;
+		netPay += 12 * (int)Math.ceil(timeWorked/100.0);
+		netPay += 16;  // Since we know the end time is >= 10 PM we can assume full pay for 10 PM to 12 AM.
+	    timeWorked = parseEndTimeInteger - twelveAM;
+	    netPay += 16 * (int)Math.ceil(timeWorked/100.0);
+	    return netPay;
+	    
+	  //starts before 10 PM and ends before 12 AM
+		
+	}else if(parseStartTimeInteger < tenPM && parseEndTimeInteger <= twelveAM) {
+		timeWorked = tenPM - parseStartTimeInteger;
+		netPay += 12 * (int)Math.ceil(timeWorked/100.0);
+		timeWorked = parseEndTimeInteger - tenPM;
+		netPay += 8 * (int)Math.ceil(timeWorked/100.0);
+		return netPay;
+		
+	}
+	
+	//starts after 10 PM and ends after 12 AM
+	 timeWorked = twelveAM - parseStartTimeInteger;
+	 netPay += 8 * (int)Math.ceil(timeWorked/100.0);
+	 timeWorked = parseEndTimeInteger - twelveAM;
+	 netPay += 16 * (int)Math.ceil(timeWorked/100.0);
+	return netPay;
+	
+	
+	
+	
+	
 	}
 
 	
