@@ -30,7 +30,11 @@ Deliverable:
 Calculate total pay, based on babysitter start and end time, and a family.  
 
 Inputs are given by the user in the console, all improper inputs for specific reasons will display an error, and the exact
-reason the input was rejected. It will continually ask until proper inputs are given. Once the proper input is given, it will display the wage. To test it with different data simply rerun the program. 
+reason the input was rejected. It will continually ask until proper inputs are given. Once the proper input is given, it will display the wage. To test it with different data simply rerun the program. Input should be in the format of the 12 hour format for example the following  
+
+4:00 PM  
+5:35 AM
+9:23 PM etc.  
 
 
 
